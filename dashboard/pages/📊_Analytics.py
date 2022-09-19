@@ -4,7 +4,7 @@ import pandas as pd
 import datetime
 import plotly.express as px
 import warnings
-
+import config
 
 warnings.filterwarnings('ignore')
 st.set_page_config(page_title='SHERLOCK CRYPTO - Analytics',  layout='wide', page_icon=':bar_chart:')
