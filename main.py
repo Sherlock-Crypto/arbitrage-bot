@@ -64,7 +64,7 @@ async def scheduled(wait_for):
 
 async def on_startup(dispatcher):
     await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
-    asyncio.create_task(scheduled(15))
+    asyncio.create_task(scheduled(900))
 
 
 async def on_shutdown(dispatcher):
