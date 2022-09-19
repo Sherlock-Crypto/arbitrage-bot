@@ -25,7 +25,7 @@ def get_tasks(session):
 
 def print_deals(responses):
     deals_string = ''
-    for num, res in enumerate(responses, start=1):
+    for num, res in enumerate(sorted(responses, key=lambda x: x['arbitrage_profit'], reverse=True), start=1):
         assets = res["pair"].split('/')
         deals_string += f'**ORDER #{num}:**\n' \
                         f'- PAIR: {res["pair"]}\n' \
