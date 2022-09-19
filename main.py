@@ -7,7 +7,6 @@ from utils.db import BotDB
 from utils.parser import Parser
 from dashboard.config import *
 
-st.text(sys.path)
 
 logging.basicConfig(level=logging.INFO)
 
