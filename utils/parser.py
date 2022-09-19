@@ -35,21 +35,21 @@ class Parser(BotDB):
         return tasks
 
     def print_dict(self, dct):
-        top_string = f'[{self.timestamp}]<br><b>TOP EXCHANGES TO ACCOMMODATE LIQUIDITY:</b><br>'
+        top_string = f'[{self.timestamp}]\n<b>TOP EXCHANGES TO ACCOMMODATE LIQUIDITY:</b>\n'
         for item, amount in dct.items():
-            top_string += "{} ({})<br>".format(item, amount)
+            top_string += "{} ({})\n".format(item, amount)
         return top_string
 
     def print_deals(self):
-        deals_string = f'[{self.timestamp}]<br><b>ARBITRAGE DEALS:</b><br>'
+        deals_string = f'[{self.timestamp}]\n<b>ARBITRAGE DEALS:</b>\n'
         for num, line in enumerate(self.lines, start=1):
             assets = line[1].split('/')
-            deals_string += f'<b>ORDER #{num}:</b><br>' \
-                            f'Pair - {line[1]}<br>' \
-                            f'Sell {line[6]} {assets[0]} on {line[2]} for bid price {line[4]:.10f} {assets[1]}<br>' \
-                            f'Buy {line[7]} {assets[0]} on {line[3]} for ask price {line[5]:.10f} {assets[1]}<br>'\
-                            f'<u>PROFIT:</u>  {line[8]:.7f}<br>' \
-                            f'<br>'
+            deals_string += f'<b>ORDER #{num}:</b>\n' \
+                            f'Pair - {line[1]}\n' \
+                            f'Sell {line[6]} {assets[0]} on {line[2]} for bid price {line[4]:.10f} {assets[1]}\n' \
+                            f'Buy {line[7]} {assets[0]} on {line[3]} for ask price {line[5]:.10f} {assets[1]}\n'\
+                            f'<u>PROFIT:</u>  {line[8]:.7f}\n' \
+                            f'\n'
         return deals_string
 
 
