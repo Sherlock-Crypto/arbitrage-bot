@@ -8,6 +8,7 @@ from utils.parser import Parser
 sys.path.append('arbitrage-bot/config')
 from config import *
 
+st.text(sys.path)
 
 logging.basicConfig(level=logging.INFO)
 
