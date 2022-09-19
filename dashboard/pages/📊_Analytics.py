@@ -5,7 +5,6 @@ import datetime
 import plotly.express as px
 import warnings
 import config
-from streamlit.ScriptRunner import RerunException
 
 warnings.filterwarnings('ignore')
 st.set_page_config(page_title='SHERLOCK CRYPTO - Analytics',  layout='wide', page_icon=':bar_chart:')
@@ -93,7 +92,7 @@ def cumsum():
     st.plotly_chart(fig_low)
 
 if st.button('MANUAL REFRESH'):
-    raise RerunException
+    st.experimental_rerun()
 
 conn = init_connection()
 df = create_table()
