@@ -42,7 +42,7 @@ class Parser(BotDB):
 
     def print_deals(self):
         deals_string = f'[{self.timestamp}]\n<b>ARBITRAGE DEALS:</b>\n'
-        for num, line in enumerate(self.lines, start=1):
+        for num, line in enumerate(sorted(self.lines, key=lambda x: x[8], reverse=True), start=1):
             assets = line[1].split('/')
             deals_string += f'<b>ORDER #{num}:</b>\n' \
                             f'Pair - {line[1]}\n' \

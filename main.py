@@ -64,18 +64,12 @@ async def scheduled(wait_for):
 
 async def on_startup(dispatcher):
     await bot.set_webhook(WEBHOOK_URL, drop_pending_updates=True)
-    asyncio.create_task(scheduled(900))
+    asyncio.create_task(scheduled(config.PARSE_INTERVAL))
 
 
 async def on_shutdown(dispatcher):
     await bot.delete_webhook()
 
-
-# # запускаем лонг поллинг
-# if __name__ == '__main__':
-#     loop = asyncio.get_event_loop()
-#     loop.create_task(scheduled(60))
-#     executor.start_polling(dp, skip_updates=True, loop=loop)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)

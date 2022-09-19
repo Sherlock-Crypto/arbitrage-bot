@@ -133,7 +133,7 @@ m2.metric('Events on last refresh', last_events_count,
 
 t1.metric('Last refreshed', current_time.strftime('%H:%M'))
 
-next_refresh = datetime.timedelta(minutes=30)
+next_refresh = datetime.timedelta(seconds=config.PARSE_INTERVAL+60)
 estimated_time = current_time + next_refresh
 t2.metric('Next refresh estimated time', estimated_time.strftime('%H:%M'))
 

@@ -1,6 +1,8 @@
 import os
 path = os.path.dirname(__file__)
 
+PARSE_INTERVAL = 10
+
 RAPID_API_KEY = os.getenv('RAPID_API_KEY')
 API_TOKEN = os.getenv('API_TOKEN')
 DB_URI = os.getenv('DATABASE_URL')
