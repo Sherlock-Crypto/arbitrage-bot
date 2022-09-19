@@ -5,10 +5,6 @@ import datetime
 import plotly.express as px
 import warnings
 from config import *
-import sys
-sys.path.append('../')
-import config
-sys.path.remove('../')
 
 
 warnings.filterwarnings('ignore')
