@@ -2,15 +2,14 @@ import streamlit as st
 import psycopg2
 import pandas as pd
 import datetime
-import plotly.figure_factory as ff
 import plotly.express as px
-import plotly.graph_objects as go
 import warnings
 from config import *
-# import os
-#
-# path = os.path.dirname(__file__)
-# my_file = path+'/photo.png'
+import sys
+sys.path.append('../')
+import config
+
+
 warnings.filterwarnings('ignore')
 st.set_page_config(page_title='SHERLOCK CRYPTO - Analytics',  layout='wide', page_icon=':bar_chart:')
 
