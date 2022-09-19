@@ -6,7 +6,7 @@ import plotly.figure_factory as ff
 import plotly.express as px
 import plotly.graph_objects as go
 import warnings
-from dashboard.config import *
+from config import *
 # import os
 #
 # path = os.path.dirname(__file__)
