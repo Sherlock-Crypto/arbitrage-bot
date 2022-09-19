@@ -5,7 +5,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.utils.executor import start_webhook
 from utils.db import BotDB
 from utils.parser import Parser
-from config import *
+from dashboard.config import *
 
 st.text(sys.path)
 

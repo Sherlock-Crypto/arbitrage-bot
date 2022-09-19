@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 import streamlit as st
 from datetime import datetime
-from ..import config
+import config
 
 
 HEADERS = {
