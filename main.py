@@ -3,9 +3,11 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils.executor import start_webhook
-from config import *
 from utils.db import BotDB
 from utils.parser import Parser
+sys.path.append('arbitrage-bot/config')
+from config import *
+
 
 logging.basicConfig(level=logging.INFO)
 

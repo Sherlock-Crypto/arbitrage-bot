@@ -2,7 +2,9 @@ import asyncio
 import aiohttp
 import streamlit as st
 from datetime import datetime
-import config
+import sys
+sys.path.append('arbitrage-bot/config')
+from config import *
 
 
 HEADERS = {

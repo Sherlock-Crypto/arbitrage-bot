@@ -4,6 +4,7 @@ import pandas as pd
 import datetime
 import plotly.express as px
 import warnings
+sys.path.append('arbitrage-bot/config')
 from config import *
 
 
