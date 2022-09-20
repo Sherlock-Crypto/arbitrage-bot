@@ -1,7 +1,7 @@
 import os
 path = os.path.dirname(__file__)
 
-PARSE_INTERVAL = 800
+PARSE_INTERVAL = 900
 
 RAPID_API_KEY = os.getenv('RAPID_API_KEY')
 API_TOKEN = os.getenv('API_TOKEN')
