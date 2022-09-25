@@ -23,31 +23,6 @@ def create_table():
 
 
 @st.experimental_memo(ttl=600)
-def best_exchanges_and_pairs():
-    df_best_exc = df.copy()
-    df_best_exc = df[df.timestamp == current_time]
-    best_exc_pairs = dict()
-    for _, row in df_best_exc.iterrows():
-        exc_pair = row['sell_at'], row['buy_at']
-        token_pair = {row['pair']:row['profit']}
-        if exc_pair in best_exc_pairs.keys():
-            best_exc_pairs[exc_pair]['count'] += 1
-            best_exc_pairs[exc_pair]['token_pair'].update(token_pair)
-        else:
-            best_exc_pairs[exc_pair] = {'count':1, 'token_pair':token_pair}
-    
-    best_exc_pairs = sorted(best_exc_pairs.items(), key=lambda x: x[1]['count'], reverse=True)
-
-    for num, exc in enumerate(best_exc_pairs, start=1):
-        st.markdown(f"**{num}. {' - '.join(exc[0]).upper()}**")
-        pair_profit = dict(sorted(exc[1]['token_pair'].items(), key=lambda x:x[1], reverse=True))
-        df_pair_profit = pd.DataFrame.from_dict(pair_profit, orient='index').reset_index()
-        df_pair_profit.columns = ['Pair', 'Profit']
-        fig = px.bar(df_pair_profit, x='Pair', y='Profit')
-        st.plotly_chart(fig)
-
-
-@st.experimental_memo(ttl=600)
 def best_pairs():
     fig = px.bar(profit_sum_pair, y='pair', x='profit', color='pair',
                  width=600, height=900,
