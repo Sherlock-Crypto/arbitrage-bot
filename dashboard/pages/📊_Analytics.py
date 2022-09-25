@@ -6,6 +6,7 @@ import plotly.express as px
 import warnings
 import config
 
+
 warnings.filterwarnings('ignore')
 st.set_page_config(page_title='SHERLOCK CRYPTO - Analytics',  layout='wide', page_icon=':bar_chart:')
 
@@ -22,6 +23,31 @@ def create_table():
 
 
 @st.experimental_memo(ttl=600)
+def best_exchanges_and_pairs():
+    df_best_exc = df.copy()
+    df_best_exc = df[df.timestamp == current_time]
+    best_exc_pairs = dict()
+    for _, row in df_best_exc.iterrows():
+        exc_pair = row['sell_at'], row['buy_at']
+        token_pair = {row['pair']:row['profit']}
+        if exc_pair in best_exc_pairs.keys():
+            best_exc_pairs[exc_pair]['count'] += 1
+            best_exc_pairs[exc_pair]['token_pair'].update(token_pair)
+        else:
+            best_exc_pairs[exc_pair] = {'count':1, 'token_pair':token_pair}
+    
+    best_exc_pairs = sorted(best_exc_pairs.items(), key=lambda x: x[1]['count'], reverse=True)
+
+    for num, exc in enumerate(best_exc_pairs, start=1):
+        st.markdown(f"**{num}. {' - '.join(exc[0]).upper()}**")
+        pair_profit = dict(sorted(exc[1]['token_pair'].items(), key=lambda x:x[1], reverse=True))
+        df_pair_profit = pd.DataFrame.from_dict(pair_profit, orient='index').reset_index()
+        df_pair_profit.columns = ['Pair', 'Profit']
+        fig = px.bar(df_pair_profit, x='Pair', y='Profit')
+        st.plotly_chart(fig)
+
+
+@st.experimental_memo(ttl=600)
 def best_pairs():
     fig = px.bar(profit_sum_pair, y='pair', x='profit', color='pair',
                  width=600, height=900,
@@ -29,6 +55,7 @@ def best_pairs():
                  )
     fig.update_layout(showlegend=False)
     st.plotly_chart(fig)
+
 
 @st.experimental_memo(ttl=600)
 def historical_profit_by_pair():
@@ -102,10 +129,13 @@ previous_time = df.timestamp.unique()[-2]
 previous_event_count = df[df.timestamp==previous_time].shape[0]
 
 df['cumsum_profit'] = df.groupby('pair')['profit'].cumsum()
+
 profit_sum_pair = df.copy()
 profit_sum_pair = profit_sum_pair.groupby('pair').agg({'profit': 'sum'}) \
         .sort_values('profit', ascending=False) \
         .reset_index()
+
+profit_mean_pair = df.copy()
 profit_mean_pair = df.groupby('pair').agg({'profit':'mean'}).reset_index()
 
 divider = profit_mean_pair['profit'].mean()
@@ -134,6 +164,9 @@ t1.metric('Last refreshed', current_time.strftime('%H:%M'))
 next_refresh = datetime.timedelta(seconds=config.PARSE_INTERVAL+60)
 estimated_time = current_time + next_refresh
 t2.metric('Next refresh estimated time', estimated_time.strftime('%H:%M'))
+
+st.subheader('Best sell-buy exchanges, with best pairs:')
+best_exchanges_and_pairs()
 
 st.subheader('Arbitrage profit on each iteration, by pair:')
 historical_profit_by_pair()

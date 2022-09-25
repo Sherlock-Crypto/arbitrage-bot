@@ -1,12 +1,9 @@
 import streamlit as st
-# import os
-#
-# path = os.path.dirname(__file__)
-# logo = path+'/logo.png'
+
 
 st.set_page_config(page_title='SHERLOCK CRYPTO - Home',  layout='wide', page_icon=':house:')
+
 st.title('Sherlock Crypto arbitrage dashboard')
-# st.image(logo, width = 120)
 st.header('Welcome to Sherlock Crypto!')
 st.markdown('Sherlock Crypto is a comprehensive tool that allows users to find and analyze crypto arbitrage opportunities on the go.')
 st.markdown('**The tool is composed of:**\n'
@@ -14,5 +11,3 @@ st.markdown('**The tool is composed of:**\n'
             '- **Database** \- collects all events\n'
             '- **Scanner dashboard** \- helps users search for opportunities manually\n'
             '- **Analytical dashboard** \- gives a thorough overview on both current and historical arbitrage market state')
-# st.subheader('Links:')
-# st.markdown('- **Telegram bot:**  [t.me/ArbitrageScannerBot](https://t.me/ArbitrageScannerBot)\n')
