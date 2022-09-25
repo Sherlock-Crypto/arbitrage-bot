@@ -165,10 +165,6 @@ next_refresh = datetime.timedelta(seconds=config.PARSE_INTERVAL+60)
 estimated_time = current_time + next_refresh
 t2.metric('Next refresh estimated time', estimated_time.strftime('%H:%M'))
 
-tab1, tab2, tab3, tab4, tab5,  = st.tabs(["Cat", "Dog", "Owl"])
-
-st.subheader('Top exchanges:')
-best_exchanges_and_pairs()
 
 st.subheader('Arbitrage profit on each iteration, by pair:')
 historical_profit_by_pair()
