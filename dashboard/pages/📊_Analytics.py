@@ -6,6 +6,7 @@ import plotly.express as px
 import warnings
 import config
 
+
 warnings.filterwarnings('ignore')
 st.set_page_config(page_title='SHERLOCK CRYPTO - Analytics',  layout='wide', page_icon=':bar_chart:')
 
@@ -29,6 +30,7 @@ def best_pairs():
                  )
     fig.update_layout(showlegend=False)
     st.plotly_chart(fig)
+
 
 @st.experimental_memo(ttl=600)
 def historical_profit_by_pair():
@@ -102,10 +104,13 @@ previous_time = df.timestamp.unique()[-2]
 previous_event_count = df[df.timestamp==previous_time].shape[0]
 
 df['cumsum_profit'] = df.groupby('pair')['profit'].cumsum()
+
 profit_sum_pair = df.copy()
 profit_sum_pair = profit_sum_pair.groupby('pair').agg({'profit': 'sum'}) \
         .sort_values('profit', ascending=False) \
         .reset_index()
+
+profit_mean_pair = df.copy()
 profit_mean_pair = df.groupby('pair').agg({'profit':'mean'}).reset_index()
 
 divider = profit_mean_pair['profit'].mean()
@@ -134,6 +139,7 @@ t1.metric('Last refreshed', current_time.strftime('%H:%M'))
 next_refresh = datetime.timedelta(seconds=config.PARSE_INTERVAL+60)
 estimated_time = current_time + next_refresh
 t2.metric('Next refresh estimated time', estimated_time.strftime('%H:%M'))
+
 
 st.subheader('Arbitrage profit on each iteration, by pair:')
 historical_profit_by_pair()
