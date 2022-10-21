@@ -63,6 +63,7 @@ class Parser(BotDB):
             self.timestamp = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
             for response in responses:
                 response = await response.json()
+                print(response)
                 try:
                     profit = response['arbitrage_profit']
                 except:
